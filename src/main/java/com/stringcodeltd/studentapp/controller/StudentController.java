@@ -37,8 +37,11 @@ public class StudentController {
 
    @DeleteMapping("/{id}")
    public String deleteStudent(@PathVariable(name="id") Long id){
-        stdrepo.deleteById(id);
-        return "Student with "+id +" deleted successfully";
+        if(stdrepo.existsById(id)) {
+            stdrepo.deleteById(id);
+            return "Student with id" + id + " deleted successfully";
+        }
+        return "There is no student with id "+id;
 
    }
 
