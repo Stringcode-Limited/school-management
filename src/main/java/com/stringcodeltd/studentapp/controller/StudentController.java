@@ -32,10 +32,16 @@ public class StudentController {
         return byId.isPresent() ? Optional.of(byId.get()) : null;
 
     }
+
+
 @GetMapping("/filterbydept/{department}")
     public List<Student> getByDepartment(@PathVariable(name="department") String dept){
         return stdrepo.findByDept(dept);
 }
 
+@GetMapping("/filterbygender/{gender}")
+    public List<Student> getByGender(@PathVariable(name="gender") String gender){
+        return stdrepo.findByGender(gender);
+}
 
 }

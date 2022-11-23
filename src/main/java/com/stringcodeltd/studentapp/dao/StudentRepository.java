@@ -15,6 +15,9 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query(value = "SELECT o FROM Student o WHERE o.department= :dept")
     List<Student> findByDept(@Param("dept") String dept);
 
+    @Query(value = "SELECT o from Student o WHERE o.gender= :gen")
+    List<Student> findByGender(@Param("gen") String gender);
+
 
 
 
