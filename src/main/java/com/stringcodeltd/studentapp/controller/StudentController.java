@@ -3,10 +3,7 @@ package com.stringcodeltd.studentapp.controller;
 import com.stringcodeltd.studentapp.dao.StudentRepository;
 import com.stringcodeltd.studentapp.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.List;
@@ -33,6 +30,17 @@ public class StudentController {
 
     }
 
+   @PostMapping()
+   public Student createStudent(@RequestBody Student student){
+        return stdrepo.save(student);
+   }
+
+   @DeleteMapping("/{id}")
+   public String deleteStudent(@PathVariable(name="id") Long id){
+        stdrepo.deleteById(id);
+        return "Student with "+id +" deleted successfully";
+
+   }
 
 @GetMapping("/filterbydept/{department}")
     public List<Student> getByDepartment(@PathVariable(name="department") String dept){
