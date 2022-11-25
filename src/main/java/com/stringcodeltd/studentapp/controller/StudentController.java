@@ -5,6 +5,7 @@ import com.stringcodeltd.studentapp.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +32,7 @@ public class StudentController {
     }
 
    @PostMapping()
-   public Student createStudent(@RequestBody Student student){
+   public Student createStudent(@Valid @RequestBody Student student){
         return stdrepo.save(student);
    }
 
@@ -45,6 +46,26 @@ public class StudentController {
 
    }
 
+   @PutMapping("/{id}")
+   public String  updateStudent(@PathVariable(name="id")Long id, @Valid @RequestBody Student studentId){
+
+        if(stdrepo.existsById(id)){
+            Student std =  stdrepo.findById(id).get();
+            std.setFirstName(studentId.getFirstName());
+            std.setLastName(studentId.getLastName());
+            std.setDepartment(studentId.getDepartment());
+            std.setGender(studentId.getGender());
+            std.setLevel(studentId.getLevel());
+
+            stdrepo.save(std);
+            return "Record updated successfully";
+        }
+        return "No student with such an id";
+   }
+
+
+
+
 @GetMapping("/filterbydept/{department}")
     public List<Student> getByDepartment(@PathVariable(name="department") String dept){
         return stdrepo.findByDept(dept);
@@ -54,5 +75,7 @@ public class StudentController {
     public List<Student> getByGender(@PathVariable(name="gender") String gender){
         return stdrepo.findByGender(gender);
 }
+
+
 
 }
