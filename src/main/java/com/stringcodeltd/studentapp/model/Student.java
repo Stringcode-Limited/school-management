@@ -15,6 +15,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Setter
@@ -51,6 +52,10 @@ public class Student {
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
     private Date registeredDate;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
 
 

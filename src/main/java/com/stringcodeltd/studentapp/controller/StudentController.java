@@ -1,6 +1,8 @@
 package com.stringcodeltd.studentapp.controller;
 
+import com.stringcodeltd.studentapp.dao.AddressRepository;
 import com.stringcodeltd.studentapp.dao.StudentRepository;
+import com.stringcodeltd.studentapp.model.Address;
 import com.stringcodeltd.studentapp.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,9 @@ public class StudentController {
 
     @Autowired
     private StudentRepository stdrepo;
+
+    @Autowired
+    private AddressRepository addressrepo;
 
     @GetMapping()
     public List<Student> getallStudent(){
