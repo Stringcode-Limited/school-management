@@ -1,17 +1,14 @@
 package com.stringcodeltd.studentapp.controller;
 
-import com.stringcodeltd.studentapp.dao.AddressRepository;
-import com.stringcodeltd.studentapp.dao.StudentRepository;
-import com.stringcodeltd.studentapp.model.Address;
+import com.stringcodeltd.studentapp.address.controller.AddressController;
+import com.stringcodeltd.studentapp.address.dao.AddressRepository;
+import com.stringcodeltd.studentapp.address.service.AddressService;
 import com.stringcodeltd.studentapp.model.Student;
 import com.stringcodeltd.studentapp.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,9 +19,8 @@ public class StudentController {
     @Autowired
 //    private StudentRepository stdrepo;
     private StudentsService studentsService;
-
     @Autowired
-    private AddressRepository addressrepo;
+    private AddressService addressService;
 
     @GetMapping()
     public List<Student> getallStudent(){return studentsService.getAllStudentDetails();
@@ -37,7 +33,9 @@ public class StudentController {
     }
 
    @PostMapping()
-   public Student createStudent(@Valid @RequestBody Student student){return studentsService.saveStudent(student);
+   public Student createStudent(@Valid @RequestBody Student student){
+        return studentsService.saveStudent(student);
+
    }
 
    @DeleteMapping("/{id}")
@@ -46,7 +44,8 @@ public class StudentController {
 
    @PutMapping("/{id}")
    public String  updateStudent(@PathVariable(name="id")Long id, @Valid @RequestBody Student studentId){ return  studentsService.updateStudent(id,studentId);
-   }
+
+    }
 
 
 @GetMapping("/filterbydept/{department}")
@@ -56,7 +55,5 @@ public class StudentController {
 @GetMapping("/filterbygender/{gender}")
     public List<Student> getByGender(@PathVariable(name="gender") String gender){ return studentsService.getByGender(gender);
 }
-
-
 
 }

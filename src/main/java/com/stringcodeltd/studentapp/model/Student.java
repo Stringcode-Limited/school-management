@@ -2,6 +2,7 @@ package com.stringcodeltd.studentapp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.stringcodeltd.studentapp.address.model.Address;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,13 +10,10 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Setter

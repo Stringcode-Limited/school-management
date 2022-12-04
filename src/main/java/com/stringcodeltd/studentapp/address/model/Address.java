@@ -1,4 +1,4 @@
-package com.stringcodeltd.studentapp.model;
+package com.stringcodeltd.studentapp.address.model;
 
 import com.stringcodeltd.studentapp.enums.Addresstype;
 import lombok.AllArgsConstructor;
