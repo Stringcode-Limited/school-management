@@ -47,7 +47,6 @@ public class StudentController {
 
     }
 
-
 @GetMapping("/filterbydept/{department}")
     public List<Student> getByDepartment(@PathVariable(name="department") String dept){ return studentsService.getByDepartment(dept);
 }

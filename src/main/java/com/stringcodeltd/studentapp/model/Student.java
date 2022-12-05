@@ -14,6 +14,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Setter
@@ -51,9 +52,12 @@ public class Student {
     @Temporal(TemporalType.DATE)
     private Date registeredDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id")
-    private Address address;
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "address_id")
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_student_id", referencedColumnName = "id")
+    private List<Address> address;
 
 
 

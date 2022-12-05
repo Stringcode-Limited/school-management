@@ -21,6 +21,7 @@ public class Address {
     private String city;
     private String state;
     @Enumerated(EnumType.STRING)
+
     private Addresstype type;
 
 }
