@@ -3,6 +3,7 @@ package com.stringcodeltd.studentapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.stringcodeltd.studentapp.address.model.Address;
+import com.stringcodeltd.studentapp.project.model.Project;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Setter
@@ -27,6 +30,7 @@ public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id")
     private Long id;
     @Column
     @NotNull()
@@ -56,8 +60,18 @@ public class Student {
 //    @JoinColumn(name = "address_id")
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_student_id", referencedColumnName = "id")
+    @JoinColumn(name = "fk_student_id", referencedColumnName = "student_id")
     private List<Address> address;
+
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "assigned_project",
+            joinColumns = { @JoinColumn(name = "student_id") },
+            inverseJoinColumns = { @JoinColumn(name = "project_id") }
+    )
+    private Set<Project> project=new HashSet<>();
+
 
 
 
