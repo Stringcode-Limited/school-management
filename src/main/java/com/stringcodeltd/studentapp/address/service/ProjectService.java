@@ -43,4 +43,13 @@ public class ProjectService {
         }else
             return null;
     }
+
+    public String deleteproject(Long projectId) {
+        Optional<Project> project = projectRepository.findById(projectId);
+        if(project.isPresent()){
+           projectRepository.deleteById(projectId);
+           return "project with "+projectId + " deleted successfully";
+        }else
+            return "no project with such an Id";
+    }
 }
