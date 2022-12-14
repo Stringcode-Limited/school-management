@@ -1,6 +1,7 @@
 package com.stringcodeltd.studentapp.project.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.stringcodeltd.studentapp.model.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.Set;
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonIgnore
     private Long projectId;
     @NotNull(message = "project name cannot be empty")
     private String projecctName;
