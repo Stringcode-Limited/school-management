@@ -1,4 +1,4 @@
-package com.stringcodeltd.studentapp.project.model;
+package com.stringcodeltd.studentapp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

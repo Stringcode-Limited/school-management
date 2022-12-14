@@ -1,8 +1,6 @@
 package com.stringcodeltd.studentapp.controller;
 
-import com.stringcodeltd.studentapp.address.controller.AddressController;
-import com.stringcodeltd.studentapp.address.dao.AddressRepository;
-import com.stringcodeltd.studentapp.address.service.AddressService;
+import com.stringcodeltd.studentapp.service.AddressService;
 import com.stringcodeltd.studentapp.model.Student;
 import com.stringcodeltd.studentapp.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;

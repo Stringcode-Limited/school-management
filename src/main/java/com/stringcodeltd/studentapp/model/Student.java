@@ -2,8 +2,6 @@ package com.stringcodeltd.studentapp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.stringcodeltd.studentapp.address.model.Address;
-import com.stringcodeltd.studentapp.project.model.Project;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

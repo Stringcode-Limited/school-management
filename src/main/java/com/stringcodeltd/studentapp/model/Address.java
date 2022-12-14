@@ -1,4 +1,4 @@
-package com.stringcodeltd.studentapp.address.model;
+package com.stringcodeltd.studentapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.stringcodeltd.studentapp.enums.Addresstype;

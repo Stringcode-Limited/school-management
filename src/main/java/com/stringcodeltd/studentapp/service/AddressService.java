@@ -1,7 +1,7 @@
-package com.stringcodeltd.studentapp.address.service;
+package com.stringcodeltd.studentapp.service;
 
-import com.stringcodeltd.studentapp.address.dao.AddressRepository;
-import com.stringcodeltd.studentapp.address.model.Address;
+import com.stringcodeltd.studentapp.dao.AddressRepository;
+import com.stringcodeltd.studentapp.model.Address;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

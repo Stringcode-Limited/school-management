@@ -1,8 +1,7 @@
-package com.stringcodeltd.studentapp.address.controller;
+package com.stringcodeltd.studentapp.controller;
 
-import com.stringcodeltd.studentapp.address.model.Address;
-import com.stringcodeltd.studentapp.address.service.AddressService;
-import com.stringcodeltd.studentapp.model.Student;
+import com.stringcodeltd.studentapp.model.Address;
+import com.stringcodeltd.studentapp.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
