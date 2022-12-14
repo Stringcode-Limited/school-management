@@ -1,5 +1,6 @@
 package com.stringcodeltd.studentapp.address.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.stringcodeltd.studentapp.enums.Addresstype;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import javax.persistence.*;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long addressId;
     private String street;
     private String city;

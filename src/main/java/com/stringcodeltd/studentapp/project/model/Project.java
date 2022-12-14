@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long projectId;
+    @NotNull(message = "project name cannot be empty")
     private String projecctName;
     @ManyToMany(mappedBy = "project")
     private Set<Student> student=new HashSet<>();

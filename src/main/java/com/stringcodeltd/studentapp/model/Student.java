@@ -31,6 +31,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id")
+    @JsonIgnore
     private Long id;
     @Column
     @NotNull()
@@ -64,11 +65,11 @@ public class Student {
     private List<Address> address;
 
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = CascadeType.ALL )
     @JoinTable(
             name = "assigned_project",
-            joinColumns = { @JoinColumn(name = "student_id") },
-            inverseJoinColumns = { @JoinColumn(name = "project_id") }
+            joinColumns =  @JoinColumn(name = "student_id") ,
+            inverseJoinColumns =  @JoinColumn(name = "project_id")
     )
     private Set<Project> project=new HashSet<>();
 
