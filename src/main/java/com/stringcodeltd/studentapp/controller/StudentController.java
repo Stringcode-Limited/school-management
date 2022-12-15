@@ -59,4 +59,11 @@ public class StudentController {
         return studentsService.getStudentPagination(pageNumber,pageSize);
 }
 
+@GetMapping("/pagination/{pageNumber}/{pageSize}/{sortedProperty}")
+    public Page<Student> studentPageffj(@PathVariable Integer pageNumber,
+                                           @PathVariable Integer pageSize,
+                                           @PathVariable String sortedProperty){
+        return studentsService.getStudentPagination(pageNumber, pageSize, sortedProperty);
+}
+
 }

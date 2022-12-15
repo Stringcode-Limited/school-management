@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,5 +65,17 @@ public class StudentsService {
     public Page<Student> getStudentPagination(Integer pageNumber, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
         return stdrepo.findAll(pageable);
+    }
+
+    public Page<Student> getStudentPagination(Integer pageNumber, Integer pageSize, String sortedProperty) {
+        Pageable pageable = null;
+        if(null != sortedProperty){
+            pageable = PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC,sortedProperty);
+        }else{
+            pageable =  PageRequest.of(pageNumber, pageSize, Sort.Direction.ASC,"firstName");
+        }
+
+        return stdrepo.findAll(pageable);
+
     }
 }
