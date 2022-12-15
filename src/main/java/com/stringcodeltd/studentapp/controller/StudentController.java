@@ -4,6 +4,7 @@ import com.stringcodeltd.studentapp.service.AddressService;
 import com.stringcodeltd.studentapp.model.Student;
 import com.stringcodeltd.studentapp.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -51,6 +52,11 @@ public class StudentController {
 
 @GetMapping("/filterbygender/{gender}")
     public List<Student> getByGender(@PathVariable(name="gender") String gender){ return studentsService.getByGender(gender);
+}
+
+@GetMapping("/pagination/{pageNumber}/{pageSize}")
+    public Page<Student> studentPage(@PathVariable Integer pageNumber, @PathVariable Integer pageSize){
+        return studentsService.getStudentPagination(pageNumber,pageSize);
 }
 
 }
