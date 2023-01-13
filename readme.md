@@ -23,7 +23,7 @@ No Need to fork the repository. All tasks will be done here
 
 4. Commit changes to the branch and push to the repository.
 
-5. Come back to to the repository and open a pull request on the development branch.
+5. Come back to to the repository and open a pull request on the main branch.
 
 6. Do not merge your pull request yourself. Wait for review and merging.
 
@@ -34,5 +34,5 @@ For update on a specific task, repeat from step 3 to 7
 
 DO NOT MERGE YOUR PULL REQUEST. (WARNING)
 
-DO NOT WORK ON MAIN, STAGING, DEVELOPMENT BRANCHES
+DO NOT WORK ON MAIN BRANCHES
 
