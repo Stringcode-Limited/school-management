@@ -6,18 +6,18 @@ You should contribute based on the issue you are working on. Follow the guides. 
 
 No Need to fork the repository. All tasks will be done here
 
-## steps
+## Steps to follow
 1. Clone this repository to your machine.
 
 2. Create a new branch(use ur task title as the branch name AND always create your new brancg from main, Not developemnt or staging).
 
-    git fetch origin
+   git fetch origin
 
-    git checkout main
+   git checkout main
 
-    git pull origin main
+   git pull origin main
 
-    git checkout -b {task-title}
+   git checkout -b {task-title}
 
 3. Make all changes on the branch you just created.
 
@@ -32,7 +32,7 @@ Repeat above steps from 2 to 7 for any new task.
 
 For update on a specific task, repeat from step 3 to 7
 
-DO NOT MERGE YOUR PULL REQUEST
+DO NOT MERGE YOUR PULL REQUEST. (WARNING)
 
 DO NOT WORK ON MAIN, STAGING, DEVELOPMENT BRANCHES
 
