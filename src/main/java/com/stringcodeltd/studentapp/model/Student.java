@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Setter
-@Getter
+    @Setter
+    @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -61,6 +61,10 @@ public class Student {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_student_id", referencedColumnName = "student_id")
     private List<Address> address;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_student_id", referencedColumnName = "student_id")
+    private List<Attendance> attendances;
 
 
     @ManyToMany(cascade = CascadeType.ALL )
