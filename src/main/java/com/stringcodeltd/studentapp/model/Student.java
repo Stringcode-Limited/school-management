@@ -63,12 +63,6 @@ public class Student {
     @JoinColumn(name = "fk_student_id", referencedColumnName = "student_id")
     private List<Address> address;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "student_courses",
-            joinColumns = {@JoinColumn(name = "student_id")},
-            inverseJoinColumns = {@JoinColumn(name = "course_id")}
-    )
-    private Set<Course> course = new HashSet<>();
 
     @ManyToMany(cascade = CascadeType.ALL )
     @JoinTable(
