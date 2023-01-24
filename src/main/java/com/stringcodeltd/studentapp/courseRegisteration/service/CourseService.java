@@ -96,9 +96,9 @@ public class CourseService {
     }
 
     public String deleteCourseByCourseCode(String code){
-        Optional<Course> course = Optional.ofNullable(courseRepo.findByCourseCode(code));
-        if(course.isPresent()){
-            courseRepo.deleteByCourseCode(code);
+        Optional<Course> data = Optional.ofNullable(courseRepo.findByCourseCode(code));
+        if(data.isPresent()){
+            courseRepo.delete(courseRepo.findByCourseCode(code));
 
             return code + "has been deleted suessfully";
         }
