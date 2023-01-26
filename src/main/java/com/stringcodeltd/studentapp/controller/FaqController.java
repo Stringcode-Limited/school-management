@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/faq")
@@ -25,7 +26,10 @@ public class FaqController {
     public List<FAQ> getAllFAQs(){
         return faqService.getAllFAQs();
     }
-
+    @GetMapping("/id")
+    public Optional<FAQ> getSpecificFaq(@PathVariable(name="id") int faqId){
+        return faqService.getSpecificQuestion(faqId);
+    }
     @PutMapping("/update/{id}")
     public String editFAQ(@RequestBody FAQ faq, @PathVariable(name = "id") int faqID){
         return faqService.updateFAQ(faq, faqID);

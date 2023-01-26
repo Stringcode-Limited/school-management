@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FaqService {
@@ -40,5 +41,12 @@ public class FaqService {
             return "FAQ with id " + faqID + " has been deleted successfully";
         }
         return "FAQ with id " + faqID + " does not exist";
+    }
+
+    public Optional<FAQ> getSpecificQuestion(int faqId) {
+        if(faqrepo.existsById(faqId)){
+           return faqrepo.findById(faqId);
+        }
+        return null;
     }
 }
