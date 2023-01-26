@@ -73,6 +73,12 @@ public class Student {
     private Set<Project> project=new HashSet<>();
 
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "student_courses",
+            joinColumns = {@JoinColumn(name = "student_id")},
+            inverseJoinColumns = {@JoinColumn(name = "course_id")}
+    )
+    private Set<Course> course = new HashSet<>();
 
 
 }
