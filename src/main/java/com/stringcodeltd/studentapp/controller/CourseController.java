@@ -1,14 +1,20 @@
-package com.stringcodeltd.studentapp.courseRegisteration.controller;
+package com.stringcodeltd.studentapp.controller;
 
-import com.stringcodeltd.studentapp.courseRegisteration.dao.CourseRepository;
-import com.stringcodeltd.studentapp.courseRegisteration.model.Course;
-import com.stringcodeltd.studentapp.courseRegisteration.service.CourseService;
+import com.stringcodeltd.studentapp.dao.CourseRepository;
+import com.stringcodeltd.studentapp.dao.StudentRepository;
+import com.stringcodeltd.studentapp.model.Course;
+import com.stringcodeltd.studentapp.model.Student;
+import com.stringcodeltd.studentapp.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("api/v1/course")
@@ -19,6 +25,9 @@ public class CourseController{
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private StudentRepository stdRepo;
 
 
 
@@ -37,10 +46,36 @@ public class CourseController{
         return courseService.getCourseByCourseCode(code);
     }
 
+    @GetMapping("/getbydept/{dept}")
+    public List<Course> getCourseByDepartment(@PathVariable("dept") String dept){
+        return courseService.getCourseByDepartment(dept);
+    }
+
+    @GetMapping("/getbydeptandlevel/{dept}/{level}")
+    public List<Course> getCourseByDepartmentAndLevel(@PathVariable("dept") String dept, @PathVariable("level") int level){
+        return courseService.getCourseByDepartmentAndLevel(dept, level);
+    }
+
+    @GetMapping("/getcarryovercourses/{dept}/{level}")
+    public List<Course> getForCarryOver(@PathVariable("dept") String dept, @PathVariable("level") int level){
+        return courseService.getCarryOverCourses(dept, level);
+    }
+
+    @GetMapping("/borrowedCourses/{dept}/{level}")
+    public List<Course> getBorrowedCourses(@PathVariable("dept") String dept, @PathVariable("level") int level){
+        return courseService.getBorrowedCourses(dept, level);
+    }
+
+    @GetMapping("/CarryOverborrowedCourses/{dept}/{level}")
+    public List<Course> getCOBorrowedCourses(@PathVariable("dept") String dept, @PathVariable("level") int level){
+        return courseService.getCOBorrowedCourses(dept, level);
+    }
+
     @GetMapping("/getbytitle/{title}")
     public Optional<Course> getCourseByTitle(@PathVariable("title") String title){
         return courseService.getCourseByTitle(title);
     }
+
 
     @PostMapping()
     public Course addNewCourse(@Valid @RequestBody Course course){
@@ -55,6 +90,11 @@ public class CourseController{
     @PutMapping("/updatebycoursecode/{code}")
     public Course updateCourseByCourseCode(@Valid @RequestBody Course course, @PathVariable(name = "code") String code){
         return courseService.updateCourseDetailsByCourseCode(code, course);
+    }
+
+    @PutMapping("/addstudent/courseid/{courseId}/studentId/{stdId}")
+    public String addStudent(@PathVariable int courseId, @PathVariable Long stdid) {
+        return courseService.addStudent(courseId, stdid);
     }
 
     @DeleteMapping("/{id}")

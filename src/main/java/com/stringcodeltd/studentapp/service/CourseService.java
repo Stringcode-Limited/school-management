@@ -1,18 +1,24 @@
-package com.stringcodeltd.studentapp.courseRegisteration.service;
+package com.stringcodeltd.studentapp.service;
 
-import com.stringcodeltd.studentapp.courseRegisteration.dao.CourseRepository;
-import com.stringcodeltd.studentapp.courseRegisteration.model.Course;
+import com.stringcodeltd.studentapp.dao.CourseRepository;
+import com.stringcodeltd.studentapp.model.Course;
+import com.stringcodeltd.studentapp.dao.StudentRepository;
+import com.stringcodeltd.studentapp.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 @Service
 public class CourseService {
 
     @Autowired
     private CourseRepository courseRepo;
+
+    @Autowired
+    private StudentRepository stdrepo;
 
     public Course addCourse(Course course){
         Optional<Course> data = Optional.ofNullable(courseRepo.findByCourseCode(course.getCourseCode()));
@@ -37,6 +43,41 @@ public class CourseService {
         return course.isPresent() ? course : null;
     }
 
+    public List<Course> getCourseByDepartment(String dept){
+        Stream<Course> course = courseRepo.findAll().stream()
+                .filter(p -> p.getCourseDepartment().equalsIgnoreCase(dept));
+
+        return course.toList();
+    }
+
+    public List<Course> getCourseByDepartmentAndLevel(String dept, int level){
+        Stream<Course> course = courseRepo.findAll().stream()
+                .filter(p -> p.getCourseDepartment().equalsIgnoreCase(dept) && p.getCourseLevel() == level);
+
+        return course.toList();
+    }
+
+    public List<Course> getCarryOverCourses(String dept, int level){
+        Stream<Course> course = courseRepo.findAll().stream()
+                .filter(p -> p.getCourseDepartment().equalsIgnoreCase(dept) && p.getCourseLevel() < level);
+
+        return course.toList();
+    }
+
+    public List<Course> getBorrowedCourses(String dept, int level){
+        Stream<Course> course = courseRepo.findAll().stream()
+                .filter(p -> p.getCourseDepartment().equalsIgnoreCase(dept) == false && p.getCourseLevel() == level);
+
+        return course.toList();
+    }
+
+    public List<Course> getCOBorrowedCourses(String dept, int level){
+        Stream<Course> course = courseRepo.findAll().stream()
+                .filter(p -> p.getCourseDepartment().equalsIgnoreCase(dept) == false && p.getCourseLevel() < level);
+
+        return course.toList();
+    }
+
 
     public Course updateCourseDetailsById(int id, Course course){
         Optional<Course> data = Optional.ofNullable(courseRepo.findByCourseCode(course.getCourseCode()));
@@ -59,6 +100,23 @@ public class CourseService {
         }
 
         return  null;
+    }
+
+    public String addStudent(int course_id, Long stdId){
+        Optional<Student> studentData = stdrepo.findById(stdId);
+        Optional<Course> courseData = courseRepo.findById(course_id);
+
+        if (studentData.isPresent() && courseData.isPresent()) {
+            Student newstudent = studentData.get();
+            Course newcourse = courseData.get();
+
+            newcourse.getStudent().add(newstudent);
+            courseRepo.save(newcourse);
+            return "Student added successfully";
+
+        } else {
+            return "Student or Course not found";
+        }
     }
 
     public Course updateCourseDetailsByCourseCode(String code, Course course){
@@ -97,7 +155,7 @@ public class CourseService {
     public String deleteCourseByCourseCode(String code){
         Optional<Course> course = Optional.ofNullable(courseRepo.findByCourseCode(code));
         if(course.isPresent()){
-            courseRepo.deleteByCourseCode(code);
+            courseRepo.delete(course.get());
 
             return code + "has been deleted suessfully";
         }

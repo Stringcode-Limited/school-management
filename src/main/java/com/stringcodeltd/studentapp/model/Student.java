@@ -2,7 +2,7 @@ package com.stringcodeltd.studentapp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.stringcodeltd.studentapp.courseRegisteration.model.Course;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -71,7 +71,6 @@ public class Student {
             inverseJoinColumns =  @JoinColumn(name = "project_id")
     )
     private Set<Project> project=new HashSet<>();
-
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "student_courses",

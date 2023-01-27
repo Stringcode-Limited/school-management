@@ -1,6 +1,7 @@
-package com.stringcodeltd.studentapp.courseRegisteration.model;
+package com.stringcodeltd.studentapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.stringcodeltd.studentapp.model.Student;
 import lombok.*;
 
@@ -19,6 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @ToString
 @Transactional
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "student"})
 public class Course {
     @Id
     @Column()
@@ -27,7 +29,6 @@ public class Course {
     private int course_id;
     @Column()
     @NotNull()
-    @PrimaryKeyJoinColumn
     private String courseCode;
     @Column
     @NotNull()

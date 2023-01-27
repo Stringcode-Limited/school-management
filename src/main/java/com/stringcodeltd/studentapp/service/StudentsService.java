@@ -1,5 +1,7 @@
 package com.stringcodeltd.studentapp.service;
 
+import com.stringcodeltd.studentapp.dao.CourseRepository;
+import com.stringcodeltd.studentapp.model.Course;
 import com.stringcodeltd.studentapp.dao.StudentRepository;
 import com.stringcodeltd.studentapp.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +13,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Stream;
 
 @Service
 public class StudentsService {
     @Autowired
     private StudentRepository stdrepo;
+
+    @Autowired
+    private CourseRepository courseRepo;
 
     public  Student saveStudent(Student student){
         return stdrepo.save(student);
@@ -28,6 +35,33 @@ public class StudentsService {
     public Optional<Student> getAllStudentDetailsById(Long studentId){
         Optional<Student> byId = stdrepo.findById(studentId);
         return byId.isPresent() ? Optional.of(byId.get()) : null;
+    }
+
+    public List<Student> getStudentsWithoutAnyCourses(){
+        Stream<Student> students = stdrepo.findAll().stream()
+                .filter(p -> p.getCourse().size() == 0);
+
+        return students.toList();
+    }
+
+    public List<Student> getStudentsNotOfferingaCourse(String code){
+        Course course = courseRepo.findByCourseCode(code);
+
+        Stream<Student> students = stdrepo.findAll().stream()
+                .filter(p -> p.getCourse().contains(course) == false);
+
+        return students.toList();
+    }
+
+    public Set<Course> getStudentCourses(Long id){
+        Optional<Student> studentData = stdrepo.findById(id);
+
+        if (studentData.isPresent()) {
+            Student student = studentData.get();
+            return  student.getCourse();
+        } else {
+            return null;
+        }
     }
 
     public String deleteStudent(Long id){
@@ -52,6 +86,41 @@ public class StudentsService {
        }
        return "No student with such an id";
    }
+
+
+    public String registerCourse(Long stdId, int course_id){
+        Optional<Student> studentData = stdrepo.findById(stdId);
+        Optional<Course> courseData = courseRepo.findById(course_id);
+
+        if (studentData.isPresent() && courseData.isPresent()) {
+            Student newstudent = studentData.get();
+            Course newcourse = courseData.get();
+
+            newstudent.getCourse().add(newcourse);
+            stdrepo.save(newstudent);
+            return "Course saved successfully";
+
+        } else {
+            return "Student or Course not found";
+        }
+    }
+
+    public String registerCourseByCourseCode(Long stdId, String courseCode){
+        Optional<Student> studentData = stdrepo.findById(stdId);
+        Optional<Course> courseData = Optional.ofNullable(courseRepo.findByCourseCode(courseCode));
+
+        if (studentData.isPresent() && courseData.isPresent()) {
+            Student newstudent = studentData.get();
+            Course newcourse = courseData.get();
+
+            newstudent.getCourse().add(newcourse);
+            stdrepo.save(newstudent);
+            return "Course added successfully";
+
+        } else {
+            return "Student or Course not found";
+        }
+    }
 
     public List<Student> getByDepartment(String dept) {
         return stdrepo.findByDept(dept);
