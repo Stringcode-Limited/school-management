@@ -1,6 +1,7 @@
 package com.stringcodeltd.studentapp.department.service;
 
 import com.stringcodeltd.studentapp.department.dao.DepartmentRepository;
+import com.stringcodeltd.studentapp.department.model.Department;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +21,7 @@ public class DepartmentService {
     private DepartmentRepository departmentRepository;
 
 
-    public List<Long> getAllDepartment() {
+    public List<Department> getAllDepartment() {
         return departmentRepository.findAll();
     }
 }

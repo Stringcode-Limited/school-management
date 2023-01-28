@@ -19,7 +19,7 @@ import javax.validation.Valid;
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long departmentID;
+    private Long departmentID;
     @Valid
     private String departmentName;
 

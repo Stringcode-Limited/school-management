@@ -14,7 +14,7 @@ public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
-    public List<Project> getAllProjzect() {
+    public List<Project> getAllProject() {
         return projectRepository.findAll();
     }
 

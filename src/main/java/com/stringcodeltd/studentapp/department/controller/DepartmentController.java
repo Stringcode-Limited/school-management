@@ -1,10 +1,9 @@
 package com.stringcodeltd.studentapp.department.controller;
 
+import com.stringcodeltd.studentapp.department.model.Department;
 import com.stringcodeltd.studentapp.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +15,12 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
     @GetMapping()
-    public List<Long> getAllDepartment(){
+    public List<Department> getAllDepartment(){
         return departmentService.getAllDepartment();
+    }
+
+    @PostMapping()
+    public Department createDepartment(@RequestBody Department department){
+        return  departmentService.createDepartment(department);
     }
 }
