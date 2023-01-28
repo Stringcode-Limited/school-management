@@ -2,7 +2,7 @@ package com.stringcodeltd.studentapp.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.stringcodeltd.studentapp.courseRegisteration.model.Course;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
