@@ -23,4 +23,10 @@ public class DepartmentController {
     public Department createDepartment(@RequestBody Department department){
         return  departmentService.createDepartment(department);
     }
+
+    @GetMapping("/id")
+    public List<Department> getDepartmentById(@PathVariable String name){
+        return departmentService.getDepartmentByName();
+    }
+
 }
