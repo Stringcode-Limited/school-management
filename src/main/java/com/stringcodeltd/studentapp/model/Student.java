@@ -3,6 +3,7 @@ package com.stringcodeltd.studentapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 //import com.stringcodeltd.studentapp.courseRegisteration.model.Course;
+import com.stringcodeltd.studentapp.department.model.Department;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,7 +44,9 @@ public class Student {
     private String gender;
     @Column
     @NotNull
-    private String department;
+    @ManyToOne
+    @JoinColumn(name = "departmentID")
+    private Department department;
     @Column
     @NotNull
     @Min(100)
