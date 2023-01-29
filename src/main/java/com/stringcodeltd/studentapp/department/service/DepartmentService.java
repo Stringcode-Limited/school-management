@@ -45,9 +45,14 @@ public class DepartmentService {
             return "Department with and id "+id+" updated successfully";
 
        }
-        return "Sorry we update failed because no department with such and Id";
+        return "Sorry update failed because no department with such and Id";
     }
 
     public String deleteDepartment(Long id) {
+        if(departmentRepository.existsById(id)){
+            departmentRepository.deleteById(id);
+            return "department deleted successfully";
+        }
+        return "Sorry we are un-able to delete department  because no department with such and Id found ";
     }
 }
