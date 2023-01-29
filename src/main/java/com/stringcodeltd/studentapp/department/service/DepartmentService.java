@@ -33,7 +33,7 @@ public class DepartmentService {
         return departmentRepository.save(department);
     }
 
-    public List<Department> getDepartmentByName() {
-
+    public List<Department> getDepartmentByName(String departmentName) {
+      return departmentRepository.findByDepartmentName(departmentName);
     }
 }

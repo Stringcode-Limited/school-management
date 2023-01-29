@@ -26,7 +26,7 @@ public class DepartmentController {
 
     @GetMapping("/id")
     public List<Department> getDepartmentById(@PathVariable String name){
-        return departmentService.getDepartmentByName();
+        return departmentService.getDepartmentByName(name);
     }
 
 }

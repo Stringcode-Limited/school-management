@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface DepartmentRepository extends JpaRepository<Department,Long> {
     Boolean existsByDepartmentName(String department);
-    @Query(value = "SELECT o from department o WHERE o.DepartmentName= :departmentname")
+    @Query(value = "SELECT  from department  WHERE DepartmentName= :departmentname")
     List<Department> findByDepartmentName(@Param("departmentname") String departmentName);
 }
