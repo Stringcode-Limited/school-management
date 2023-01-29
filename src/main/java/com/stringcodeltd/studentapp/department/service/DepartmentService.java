@@ -26,6 +26,10 @@ public class DepartmentService {
     }
 
     public Department createDepartment(Department department) {
+
+        if(departmentRepository.existsByDepartmentName(department.getDepartmentName())){
+            throw new RuntimeException("Department is already exists");
+        }
         return departmentRepository.save(department);
     }
 }
