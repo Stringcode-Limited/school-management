@@ -36,4 +36,16 @@ public class DepartmentService {
     public List<Department> getDepartmentByName(String departmentName) {
       return departmentRepository.findByDepartmentName(departmentName);
     }
+
+    public String updateDepartment(Department depart, Long id) {
+        if(departmentRepository.existsById(id)){
+            Department department = departmentRepository.findById(id).get();
+            department.setDepartmentName(depart.getDepartmentName());
+            departmentRepository.save(department);
+            return "Department with and id "+id+" updated successfully";
+
+;        }
+        return "Sorry we update failed because no department with such and Id";
+    }
+
 }

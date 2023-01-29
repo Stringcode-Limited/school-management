@@ -5,6 +5,7 @@ import com.stringcodeltd.studentapp.department.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,9 +25,14 @@ public class DepartmentController {
         return  departmentService.createDepartment(department);
     }
 
-    @GetMapping("/id")
-    public List<Department> getDepartmentById(@PathVariable String name){
+    @GetMapping("/filterbydeptname/{name}")
+    public List<Department> getDepartmentById(@PathVariable(name="name") String name){
         return departmentService.getDepartmentByName(name);
     }
+//update department names
 
+    @PutMapping("/{id}")
+    public String updateDepartment(@PathVariable(name="id") Long id, @Valid @RequestBody Department department){
+     return departmentService.updateDepartment(department,id);
+    }
 }
