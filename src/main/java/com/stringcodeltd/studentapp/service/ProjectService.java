@@ -35,7 +35,8 @@ public class ProjectService {
 
             if(projectRepository.existsById(id)){
                 Project prj =  projectRepository.findById(id).get();
-                prj.setProjecctName(project.getProjecctName());
+                prj.setProjecctName(project
+                        +prj.getProjecctName());
 
                 Project save = projectRepository.save(prj);
                 return Optional.of(save);
