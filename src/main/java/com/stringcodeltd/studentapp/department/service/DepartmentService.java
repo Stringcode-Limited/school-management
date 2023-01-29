@@ -44,8 +44,10 @@ public class DepartmentService {
             departmentRepository.save(department);
             return "Department with and id "+id+" updated successfully";
 
-;        }
+       }
         return "Sorry we update failed because no department with such and Id";
     }
 
+    public String deleteDepartment(Long id) {
+    }
 }
