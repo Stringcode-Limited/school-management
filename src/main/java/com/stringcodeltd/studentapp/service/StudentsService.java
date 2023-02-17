@@ -1,6 +1,8 @@
 package com.stringcodeltd.studentapp.service;
 
+import com.stringcodeltd.studentapp.dao.CourseRepository;
 import com.stringcodeltd.studentapp.dao.StudentRepository;
+import com.stringcodeltd.studentapp.model.Course;
 import com.stringcodeltd.studentapp.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,10 @@ import java.util.Optional;
 public class StudentsService {
     @Autowired
     private StudentRepository stdrepo;
+
+
+    @Autowired
+    private CourseRepository courseRepo;
 
     public  Student saveStudent(Student student){
         return stdrepo.save(student);
@@ -78,4 +84,40 @@ public class StudentsService {
         return stdrepo.findAll(pageable);
 
     }
+
+
+    public String registerCourse(Long stdId, int course_id){
+        Optional<Student> studentData = stdrepo.findById(stdId);
+        Optional<Course> courseData = courseRepo.findById(course_id);
+
+        if (studentData.isPresent() && courseData.isPresent()) {
+            Student newstudent = studentData.get();
+            Course newcourse = courseData.get();
+
+            newstudent.getCourse().add(newcourse);
+            stdrepo.save(newstudent);
+            return "Course saved successfully";
+
+        } else {
+            return "Student or Course not found";
+        }
+    }
+
+    public String registerCourseByCourseCode(Long stdId, String courseCode){
+        Optional<Student> studentData = stdrepo.findById(stdId);
+        Optional<Course> courseData = Optional.ofNullable(courseRepo.findByCourseCode(courseCode));
+
+        if (studentData.isPresent() && courseData.isPresent()) {
+            Student newstudent = studentData.get();
+            Course newcourse = courseData.get();
+
+            newstudent.getCourse().add(newcourse);
+            stdrepo.save(newstudent);
+            return "Course added successfully";
+
+        } else {
+            return "Student or Course not found";
+        }
+    }
+
 }
