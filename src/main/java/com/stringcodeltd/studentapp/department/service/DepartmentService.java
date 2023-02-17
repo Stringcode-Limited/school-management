@@ -1,7 +1,10 @@
 package com.stringcodeltd.studentapp.department.service;
 
+import com.stringcodeltd.studentapp.dao.CourseRepository;
 import com.stringcodeltd.studentapp.department.dao.DepartmentRepository;
 import com.stringcodeltd.studentapp.department.model.Department;
+import com.stringcodeltd.studentapp.model.Course;
+import com.stringcodeltd.studentapp.model.Student;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Getter
@@ -20,6 +24,8 @@ public class DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
+    @Autowired
+    private CourseRepository courseRepo;
 
     public List<Department> getAllDepartment() {
         return departmentRepository.findAll();
@@ -55,4 +61,5 @@ public class DepartmentService {
         }
         return "Sorry we are un-able to delete department  because no department with such and Id found ";
     }
+
 }

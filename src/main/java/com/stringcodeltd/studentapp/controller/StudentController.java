@@ -2,6 +2,7 @@ package com.stringcodeltd.studentapp.controller;
 
 import com.stringcodeltd.studentapp.service.AddressService;
 import com.stringcodeltd.studentapp.model.Student;
+import com.stringcodeltd.studentapp.service.CourseService;
 import com.stringcodeltd.studentapp.service.StudentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,9 @@ public class StudentController {
     private StudentsService studentsService;
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private CourseService courseService;
 
     @GetMapping()
     public List<Student> getallStudent(){return studentsService.getAllStudentDetails();
@@ -59,11 +63,23 @@ public class StudentController {
         return studentsService.getStudentPagination(pageNumber,pageSize);
 }
 
+
+
 @GetMapping("/pagination/{pageNumber}/{pageSize}/{sortedProperty}")
     public Page<Student> studentPageffj(@PathVariable Integer pageNumber,
                                            @PathVariable Integer pageSize,
                                            @PathVariable String sortedProperty){
         return studentsService.getStudentPagination(pageNumber, pageSize, sortedProperty);
 }
+
+    @PutMapping("/addcourse/studentid/{studid}/courseid/{courseId}")
+    public String addCourse(@PathVariable Long studid, @PathVariable int courseId) {
+        return studentsService.registerCourse(studid, courseId);
+    }
+
+    @PutMapping("/addcoursebycode/studentid/{studid}/courseid/{courseCode}")
+    public String addCourseByCode(@PathVariable Long studid, @PathVariable String courseCode) {
+        return studentsService.registerCourseByCourseCode(studid, courseCode);
+    }
 
 }
